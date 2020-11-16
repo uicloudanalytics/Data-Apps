@@ -14,6 +14,7 @@ import matplotlib as plt
 import pandas as pd
 from datetime import datetime
 import dash_daq as daq
+import dash_auth
 import plotly.express as px
 from dash.dependencies import Input, Output, State, ClientsideFunction
 import dash_core_components as dcc
@@ -24,22 +25,28 @@ from fileUpload import *
 from models import *
 from defintion import *
 #from toasts import *
+from math_test import Person,meta
 
-
-# df = pd.read_csv('C:/Users/kulkarna4029/OneDrive - ARCADIS/Studies/Python/Plotly_Dash/Clustering_algos/data/Train.csv')
-# df_dummies = pd.get_dummies(df,columns=['Gender','Married','Education','Self_Employed','Property_Area'],drop_first=True)
+#df = pd.read_csv('C:/Users/kulkarna4029/OneDrive - ARCADIS/Studies/Python/Plotly_Dash/Clustering_algos/data/Train.csv')
+#df_dummies = pd.get_dummies(df,columns=['Gender','Married','Education','Self_Employed','Property_Area'],drop_first=True)
 
 models = ['Logistic', 'Random Forest', 'GBM','KNN','XGBoost','Catboost','GNB']
 FONTSIZE = 20
 FONTCOLOR = "#F5FFFA"
 BGCOLOR ="#3445DB"
 
-fig_featureImp = featureImportnace()
+obj_feature = features()
 
 app = dash.Dash(
     __name__, meta_tags=[{"name": "viewport", "content": "width=device-width"}]
 )
 server = app.server
+
+auth = dash_auth.BasicAuth(
+    app,
+    {'admin': 'admin',
+     'developer': 'developer'}
+)
 
 toast_datasplit = html.Div(
     [     
@@ -375,7 +382,7 @@ app.layout = html.Div(
                     className="pretty_container seven columns",
                 ),
                 html.Div(
-                    [dcc.Graph(id="aggregate_graph1", figure = fig_featureImp)],
+                    [dcc.Graph(id="aggregate_graph1", figure = obj_feature.featureImportance)],
                     className="pretty_container four columns",
                 ),
             ],
@@ -492,6 +499,7 @@ def open_toast_model(target, independent, slider):
         return True
     else:
         return False
+    
 
 @app.callback(
     dash.dependencies.Output('model-graduated-bar', 'value'),
@@ -509,16 +517,14 @@ def update_graduatedBar(target, independent, slider):
 
 @app.callback(
     Output('my-output', 'children'),
-    Input("slider", "value")
-    
+    Input("slider", "value")    
 )
 def update_graduatedBar(value):
-    return "The factors considered  | The factors considered  | The factors considered  | The factors considered  | The factors considered  | The factors considered  | The factors considered  | The factors considered  | The factors considered  | The factors considered  | The factors considered  | The factors considered  | The factors considered  | The factors considered  | The factors considered  | The factors considered  |  "
-
+    return "Recommendation fucntionality is under implementation"
 
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True, use_reloader=False)
+    app.run_server(debug=False)
 
 
