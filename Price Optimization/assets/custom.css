@@ -1,22 +1,29 @@
 /*Fonts ––––––––––––––––––––––––––––––––––––––––––––––––––*/
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 
-body{
+body {
   margin: 0px;
   padding: 0px;
   background-color: #fcfcfc;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   color: #203cb3;
 }
 
 .study-browser-banner {
-  background: rgb(2,21,70);
+  /* background: rgb(2,21,70); */
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    109.6deg,
+    rgba(156, 252, 248, 1) 11.2%,
+    rgba(110, 123, 251, 1) 91.1%
+  );
+  /* linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 17%, rgba(0,212,255,1) 100%); */
   color: white;
-  padding: 12px;
-  padding-left: 2px;
+  /* padding: 12px;
+  padding-left: 2px; */
 }
 
-.div-logo{
+/* .div-logo{
   display: inline-block;
   float: right;
 }
@@ -25,62 +32,68 @@ body{
   height: 35px;
   padding: 6px;
   margin-top: 3px;
-}
+} */
 
-.h2-title, .h2-title-mobile{
-  font-family: 'Roboto';
+.h2-title,
+.h2-title-mobile {
+  /* font-family: 'Roboto'; */
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   display: inline-block;
-  letter-spacing: 3.8px;
+  letter-spacing: 0.8px;
   font-weight: 800;
   font-size: 20px;
+  text-align: center;
 }
 
-.h2-title-mobile{
+.h2-title-mobile {
   display: none;
 }
 
-h5, h6{
-  font-family: 'Roboto';
+h5,
+h6 {
+  font-family: "Roboto";
   font-weight: 600;
   font-size: 16px;
 }
 
-h5{
+h5 {
   padding-left: 42px;
 }
 
 .alert {
   padding: 20px;
-  background-color: #f44336; 
+  background-color: #f44336;
   color: white;
 }
 
-.bg-white{
+.bg-white {
   background-color: #fcfcfc;
   padding: 24px 32px;
   height: 400px;
 }
 
-.app-body{
+.app-body {
   margin-left: 4%;
 }
 
-.card{
-  padding:48px 24px 48px 24px;
+.card {
+  padding: 48px 24px 48px 24px;
   margin-left: 4%;
 }
 
-.card-left{
-  padding:48px 24px 48px 24px;
+.card-left {
+  /* padding:48px 24px 48px 24px; */
+  /* padding: 10px 24px 48px 24px; */
+  padding: 10px 12px 48px 12px;
   margin-left: 0px;
 }
 
-.padding-top-bot{
+.padding-top-bot {
   padding-top: 2px;
   padding-bottom: 2px;
 }
 
-.upload{
+.upload {
   width: 100%;
   line-height: 60px;
   border-width: 1px;
@@ -89,26 +102,28 @@ h5{
   text-align: center;
 }
 
-.upload p, .upload a {
+.upload p,
+.upload a {
   display: inline;
 }
 
-.Select-control{
+.Select-control {
   border: 1px solid #203cb3;
 }
 
-@media only screen and (max-width: 320px){
-  .Select-menu-outer, .Select-value{
+@media only screen and (max-width: 320px) {
+  .Select-menu-outer,
+  .Select-value {
     font-size: 10.5px;
   }
-  .upload{
+  .upload {
     padding: 5px;
   }
 }
 
 /* mobile */
 @media only screen and (max-width: 768px) {
-  .upload{
+  .upload {
     line-height: 60px;
     border-width: 1px;
     border-style: dashed;
@@ -117,59 +132,93 @@ h5{
     font-size: small;
   }
 
-  .columns{
+  .columns {
     width: 100%;
   }
 
-  .card, .card-left{
-    padding: 24px;  
+  .card,
+  .card-left {
+    padding: 24px;
     margin: 0px;
-  } 
+  }
 
-  .bg-white{
+  .bg-white {
     height: auto;
   }
-  
-  .study-browser-banner{
+
+  .study-browser-banner {
     padding-left: 24px;
   }
 
-  .logo{
+  .logo {
     height: 28px;
-    padding-left:0px;
-    padding-bottom:0px;
+    padding-left: 0px;
+    padding-bottom: 0px;
   }
 
-  .div-logo{
+  .div-logo {
     float: left;
     display: block;
     width: 100%;
   }
 
-  .h2-title{
-    display:none;
+  .h2-title {
+    display: none;
   }
 
-  .h2-title-mobile{
-    display:block;
-    float:left;
+  .h2-title-mobile {
+    display: block;
+    float: left;
   }
 
-  .app-body{
+  .app-body {
     margin-left: 0px;
   }
 
-  .four.columns                   { width: 100%; }
-  .eight.columns                  { width: 100%; }
+  .four.columns {
+    width: 100%;
+  }
+  .eight.columns {
+    width: 100%;
+  }
 
-  .columns{
+  .columns {
     text-align: center;
   }
 
-  .user-control{
+  .user-control {
     padding-top: 24px;
     padding-bottom: 24px;
-    
-     
   }
 }
+.baseDiv {
+  display: flex;
+  justify-content: start;
+  flex-direction: row;
+}
+
+.baseDiv h6{
+  margin-left: 30px;
+}
+.radioBtns {
+  letter-spacing: 0.1rem;
+  margin-top: 1rem;
+  margin-left: 10px;
+}
+
+.rangeSlider {
+  letter-spacing: 1;
+  margin-top: 0.75rem;
+  margin-left: 20px;
+  position: absolute;
+  right: 410px;
+  top:80px;
+}
+
+#my-range-slider{
+  margin-top: 1.2rem;
+  width: 200px;
+  margin-left: 10px;
+}
+
+

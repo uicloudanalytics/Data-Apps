@@ -1,12 +1,15 @@
+from os import link
 import dash
 import pandas as pd
 import numpy as np
-import dash_table
+from dash import dash_table
 import logging
 import plotly.graph_objs as go
 import plotly.express as px
-import dash_core_components as dcc
-import dash_html_components as html
+# import dash_core_components as dcc
+from dash import dcc
+# import dash_html_components as html
+from dash import html
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
 import Python.optimize_price
@@ -18,6 +21,9 @@ group_colors = {"control": "light blue", "reference": "red"}
 app = dash.Dash(
     __name__, meta_tags=[
         {"name": "viewport", "content": "width=device-width"}],
+    # link=[
+    #     {"rel":"icon","href":"https://149510500.v2.pressablecdn.com/wp-content/uploads/2021/07/cropped-FAV-ICON-cropped-UBTI_Globe-32x32.png","sizes":"32x32"}
+    # ]
 )
 
 server = app.server
@@ -36,116 +42,81 @@ app.layout = html.Div(
             className="study-browser-banner row",
             children=[
                 html.H2(className="h2-title",
-                        children="PRODUCT PRICE OPTIMIZATION"),
+                        children="Price Optimization using Machine Learning"),
 
-                html.Div(
-                    className="div-logo",
-                    children=html.Img(
-                        className="logo", src=app.get_asset_url("dash-logo-new.png")
-                    ),
-                ),
+                # html.Div(
+                #     className="div-logo",
+                #     children=html.Img(
+                #         className="logo", src=app.get_asset_url("ublogo.png")
+                #     ),
+                # ),
 
             ],
+            style={
+                'textAlign': 'center'
+            }
         ),
 
         html.Div(
-            [
-                html.Div(
-                    [
-                        html.Div(
-                            className="padding-top-bot",
-                            children=[
-                                html.H6("OPTIMIZE"),
-                                dcc.RadioItems(
-                                    id="selected-var-opt",
-                                    options=[
-                                        {
-                                            "label": "Price",
-                                            "value": "price"
-                                        },
-                                        {
-                                            "label": "Quantity",
-                                            "value": "quantity"
-                                        },
 
-                                    ],
-                                    value="price",
-                                    labelStyle={
-                                        "display": "inline-block",
-                                        "padding": "12px 12px 12px 12px",
-                                    },
-                                ),
-                            ],
-                        ),
-                        html.Br(),
-                        html.Div(
-                            className="padding-top-bot",
-                            children=[
+            # className="padding-top-bot",
+            children=[
 
-                                html.H6("OPTIMIZATION RANGE"),
-                                html.Div(
-                                    id='output-container-range-slider'),
-                                dcc.RangeSlider(
-                                    id='my-range-slider',
-                                    min=0,
-                                    max=500,
-                                    step=1,
-                                    marks={
-                                        0: '0',
-                                        500: '500'
-                                    },
-                                    value=[200, 400]
-                                ),
+                html.H6("Optimize"),
+                dcc.RadioItems(
+                    id="selected-var-opt",
+                    className="radioBtns",
 
-
-
-                            ],
-                        ),
-
-
-                        html.Br(),
-                        html.Div(
-                            className="padding-top-bot",
-                            children=[
-                                html.H6("FIXED COST"),
-                                daq.NumericInput(
-                                    id='selected-cost-opt',
-                                    min=0,
-                                    max=10000,
-                                    value=80
-                                )
-                                # dcc.Input(
-                                #     id = "selected-cost-opt",
-                                #     placeholder='Enter fixed cost...',
-                                #     type='text',
-                                #     value='80'
-                                # ),
-
-                            ],
-                        ),
-                        html.Br(),
-                        html.Br(),
-                        html.Br(),
-                        
-                        html.H6("RECOMMENDATION:"),
-                        html.Div(
-                            id = 'id-insights', style={'color': 'DarkCyan', 'fontSize': 15} 
-                        ),
-                        html.Br(),                    
-                        html.Div(dbc.Button("GET CODE", color="primary", className="mr-1", href="https://github.com/amitvkulkarni/Data-Apps/tree/main/Price%20Optimization",target='_blank')),
-
-
+                    inline=True,
+                    options=[
+                        {
+                            "label": "Price",
+                            "value": "price"
+                        },
+                        {
+                            "label": "Quantity",
+                            "value": "quantity"
+                        },
 
                     ],
-                    className="pretty_container two columns",
-                    id="cross-filter-options",
+                    value="price",
+                    # labelStyle={
+                    #     "display": "inline-block",
+                    #     "padding": "12px 12px 12px 12px",
+                    # },
                 ),
 
+                html.H6("Optimization Range"),
+                html.Div(id='output-container-range-slider',
+                         className="rangeSlider"),
+                dcc.RangeSlider(
+                    id='my-range-slider', min=0, max=500, step=1,
+                    marks={
+                        0: '0',
+                        500: '500'
+                    },
+                    value=[200, 400]
+                ),
+
+                html.H6("Fixed Cost"),
+                daq.NumericInput(
+                    id="selected-cost-opt",
+                    min=0,
+                    max=10000,
+                    value=80
+                )
+
+                # html.H6("Recommendation : "),
+                # html.Div(
+                #     id = 'id-insights', style={'color': 'DarkCyan', 'fontSize': 15}
+                # )
             ],
+            className="baseDiv row",
+            id="cross-filter-options",
         ),
 
 
-        html.Div(
+         html.Div(
             [
                 html.Div(
                     [
@@ -156,7 +127,7 @@ app.layout = html.Div(
                                     className="padding-top-bot",
                                     children=[
                                         html.H6("PRICE VS QUANTITY"),
-                                        dcc.Graph(id="lineChart2"),
+                                        dcc.Graph(id="lineChart2",),
                                     ],
                                 )
                             ],
@@ -266,6 +237,7 @@ app.layout = html.Div(
                 ),
             ],
         ),
+        
     ]
 )
 
@@ -282,49 +254,48 @@ def update_output(value):
         Output("heatmap", 'data'),
         Output("lineChart1", 'figure'),
         Output("lineChart2", 'figure'),
-        Output("id-insights", 'children'), 
+        Output("id-insights", 'children'),
     ],
     [
         Input("selected-var-opt", "value"),
         Input("my-range-slider", "value"),
         Input("selected-cost-opt", "value")
     ]
-
 )
 def update_output_All(var_opt, var_range, var_cost):
 
     try:
         if var_opt == 'price':
+
             res, fig_PriceVsRevenue, fig_PriceVsQuantity, opt_Price, opt_Revenue = Python.optimize_price.fun_optimize(
                 var_opt, var_range, var_cost, df)
             res = np.round(res.sort_values(
                 'Revenue', ascending=False), decimals=2)
 
             if opt_Revenue > 0:
-                return [res.to_dict('records'), fig_PriceVsRevenue, fig_PriceVsQuantity, 
-                    f'The maximum revenue of {opt_Revenue} is achieved by optimizing {var_opt} of {opt_Price}, fixed cost of {var_cost} and optimization was carried for {var_opt} range between {var_range}']
+                return [res.to_dict('records'), fig_PriceVsRevenue, fig_PriceVsQuantity,
+                        f'The maximum revenue of {opt_Revenue} is achieved by optimizing {var_opt} of {opt_Price}, fixed cost of {var_cost} and optimization was carried for {var_opt} range between {var_range}']
             else:
-                return [res.to_dict('records'), fig_PriceVsRevenue, fig_PriceVsQuantity, 
-                    f'For the fixed cost of {var_cost} and {var_opt} range between {var_range}, you will incur loss in revenue']
+                return [res.to_dict('records'), fig_PriceVsRevenue, fig_PriceVsQuantity,
+                        f'For the fixed cost of {var_cost} and {var_opt} range between {var_range}, you will incur loss in revenue']
 
         else:
-            res, fig_QuantityVsRevenue, fig_PriceVsQuantity, opt_Quantity,opt_Revenue  = Python.optimize_quantity.fun_optimize(
+
+            res, fig_QuantityVsRevenue, fig_PriceVsQuantity, opt_Quantity, opt_Revenue = Python.optimize_quantity.fun_optimize(
                 var_opt, var_range, var_cost, df)
             res = np.round(res.sort_values(
                 'Revenue', ascending=False), decimals=2)
-            
 
-            if opt_Revenue  > 0:
-                return [res.to_dict('records'), fig_QuantityVsRevenue, fig_PriceVsQuantity, 
-                    f'The maximum revenue of {opt_Revenue} is achieved by optimizing {var_opt} of {opt_Quantity}, fixed cost of {var_cost} and optimization was carried for {var_opt} range between {var_range}']
+            if opt_Revenue > 0:
+                return [res.to_dict('records'), fig_QuantityVsRevenue, fig_PriceVsQuantity,
+                        f'The maximum revenue of {opt_Revenue} is achieved by optimizing {var_opt} of {opt_Quantity}, fixed cost of {var_cost} and optimization was carried for {var_opt} range between {var_range}']
             else:
-                return [res.to_dict('records'), fig_QuantityVsRevenue, fig_PriceVsQuantity, 
-                    f'For the fixed cost of {var_cost} and {var_opt} range between {var_range}, you will incur loss in revenue']
-    
-    
+                return [res.to_dict('records'), fig_QuantityVsRevenue, fig_PriceVsQuantity,
+                        f'For the fixed cost of {var_cost} and {var_opt} range between {var_range}, you will incur loss in revenue']
+
     except Exception as e:
         logging.exception('Something went wrong with interaction logic:', e)
 
 
 if __name__ == "__main__":
-    app.run_server(debug=True, use_reloader=False, dev_tools_ui=False)
+    app.run_server(debug=True, use_reloader=True, dev_tools_ui=False)

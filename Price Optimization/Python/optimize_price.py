@@ -26,8 +26,7 @@ def fun_optimize(var_opt, var_range, var_cost, df):
                 Optimized value of revenue]
     """
 
-    fig_PriceVsQuantity = px.scatter(
-        df, x="Price", y="Quantity", color="Year", trendline="ols")
+    fig_PriceVsQuantity = px.scatter(df, x="Price", y="Quantity", color="Year", trendline="ols")
 
     # fit OLS model
     model = ols("Quantity ~ Price", data=df).fit()
