@@ -144,6 +144,7 @@ h5 {
 
   .study-browser-banner {
     padding-left: 24px;
+    
   }
 
   .logo {
@@ -153,8 +154,7 @@ h5 {
   }
 
   .div-logo {
-    float: left;
-    display: block;
+    display: inline;
     width: 100%;
   }
 
@@ -192,6 +192,10 @@ h5 {
   justify-content: space-around;
   flex-direction: row;
   margin-top: 2%;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: white;
+  padding-top: 10px;
 }
 
 .baseDiv h6{
@@ -200,7 +204,6 @@ h5 {
 .radioBtns {
   letter-spacing: 0.1rem;
   margin-top: 1rem;
-  /* margin-left: 10px; */
 }
 
 .filter{
@@ -212,10 +215,9 @@ h5 {
 .rangeSlider {
   letter-spacing: 1;
   margin-top: 0.75rem;
-  /* margin-left: 20px; */
   position: absolute;
-  right: 38%;
-  top:10%;
+  right: 43%;
+  top:15%;
 }
 
 #my-range-slider{
@@ -229,10 +231,10 @@ h5 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  padding:10px;
+  margin-left: 10px;
+  margin-right: 10px;
   background-color: white;
-  border-radius: 8px;
 }
 
 .recommend h6{
@@ -244,9 +246,9 @@ h5 {
 .recommend div{
 }
 .card{
-  width: 72%;
+  width: 100%;
   padding: 10px !important;
-  margin: 2%;
+  margin: 1%;
   /* border: 1px solid dodgerblue; */
   border-radius: 8px;
   background-color: #fcfcfc;
@@ -254,7 +256,7 @@ h5 {
 }
 
 .halfwidth{
-  width: 40% !important; 
+  width: 49% !important; 
 }
 .card::after {
   content: '';
@@ -280,6 +282,7 @@ h5 {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  margin: 20px 20px;
 }
 
 

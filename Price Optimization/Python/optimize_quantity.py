@@ -49,7 +49,7 @@ def fun_optimize(var_opt, var_range, var_cost, df):
     fig_QuantityVsRevenue.add_trace(go.Scatter(
         x=profit['Quantity'], y=profit['Revenue']))
     fig_QuantityVsRevenue.add_annotation(x=int(max_val['Quantity']), y=int(max_val['Revenue']),
-                                         text="Maximum Revenue",
+                                         text="Maximum Profit",
                                          showarrow=True,
                                          arrowhead=1)
 
