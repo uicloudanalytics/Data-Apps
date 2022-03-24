@@ -44,7 +44,6 @@ def fun_optimize(var_opt, var_range, var_cost, df):
         {"Price": Price, "Quantity": Quantity, "Revenue": Revenue})
 
     max_val = profit.loc[(profit['Revenue'] == profit['Revenue'].max())]
-    
 
     fig_QuantityVsRevenue = go.Figure()
     fig_QuantityVsRevenue.add_trace(go.Scatter(
@@ -55,11 +54,19 @@ def fun_optimize(var_opt, var_range, var_cost, df):
                                          arrowhead=1)
 
     fig_QuantityVsRevenue.update_layout(
+        margin={'t': 2, 'b':2, 'r': 2, 'l': 2},
         showlegend=False,
         xaxis_title="Quantity",
         yaxis_title="Revenue")
 
+    fig_PriceVsQuantity.update_layout(
+
+            margin={'t': 0,'b':0,'r':0,'l':0},
+
+            showlegend=False,
+
+    )
     fig_QuantityVsRevenue.add_vline(x=int(max_val['Quantity']), line_width=2, line_dash="dash",
                                     line_color="red", opacity=0.25)
 
-    return [profit, fig_QuantityVsRevenue, fig_PriceVsQuantity, round(max_val['Quantity'].values[0],2), round(max_val['Revenue'].values[0],3)]
+    return [profit, fig_QuantityVsRevenue, fig_PriceVsQuantity, round(max_val['Quantity'].values[0], 2), round(max_val['Revenue'].values[0], 3)]

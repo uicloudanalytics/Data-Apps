@@ -1,7 +1,8 @@
 
-body {
-  background-color: #e7f4fc;
+#_dash-app-content {
+  /* background-color: #e7f4fc; */
   background-image: linear-gradient(to top, #accbee 0%, #e7f0fd 100%);
+  background-size:cover
 }
 
 .js-plotly-plot .plotly .modebar {
@@ -25,7 +26,10 @@ body {
   background-color: #f9f9f9;
   margin: 10px;
   padding: 2px;
-  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content:space-evenly;
+  /* position: relative; */
   box-shadow: 2px 2px 2px lightgrey;
 }
 

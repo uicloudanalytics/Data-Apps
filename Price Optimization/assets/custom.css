@@ -231,20 +231,55 @@ h5 {
   justify-content: center;
   margin-top: 10px;
   margin-bottom: 10px;
+  background-color: white;
+  border-radius: 8px;
 }
 
 .recommend h6{
   margin-top: 0;
 }
 
+
+
 .recommend div{
 }
+.card{
+  width: 72%;
+  padding: 10px !important;
+  margin: 2%;
+  /* border: 1px solid dodgerblue; */
+  border-radius: 8px;
+  background-color: #fcfcfc;
+  transition: all 0.3s ease-in-out;
+}
+
+.halfwidth{
+  width: 40% !important; 
+}
+.card::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  transition: opacity 0.3s ease-in-out;
+}
+.card h6{
+  text-align: center;
+}
+.card:hover{
+  box-shadow: 2px 2px 2px 2px dodgerblue;
+  transform: scale(1.05, 1.05);
+}
+.card:hover::after{
+    opacity: 1;
+}
+
 
 .graphContainer{
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  justify-items: center;
 }
 
 

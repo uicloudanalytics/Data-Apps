@@ -54,9 +54,21 @@ def fun_optimize(var_opt, var_range, var_cost, df):
                                       arrowhead=1)
 
     fig_PriceVsRevenue.update_layout(
-        showlegend=False,
-        xaxis_title="Price",
-        yaxis_title="Revenue")
+
+            margin={'t': 2,'b':2,'r':2,'l':2},
+
+            showlegend=False,
+
+            xaxis_title="Price",
+
+            yaxis_title="Revenue")
+    fig_PriceVsQuantity.update_layout(
+
+            margin={'t': 0,'b':0,'r':0,'l':0},
+
+            showlegend=False,
+
+    )
 
     fig_PriceVsRevenue.add_vline(x=int(max_val['Price']), line_width=2, line_dash="dash",
                                  line_color="red", opacity=0.25)
