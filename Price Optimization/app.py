@@ -1,4 +1,5 @@
 from os import link
+from pydoc import classname
 import dash
 import pandas as pd
 import numpy as np
@@ -104,19 +105,21 @@ app.layout = html.Div(
                     min=0,
                     max=10000,
                     value=80
-                )
-
-                # html.H6("Recommendation : "),
-                # html.Div(
-                #     id = 'id-insights', style={'color': 'DarkCyan', 'fontSize': 15}
-                # )
+                ),
             ],
             className="baseDiv row",
             id="cross-filter-options",
         ),
+        html.Div(
+            children=[
+                html.H6("Recommendation : "),
+                html.Div(id='id-insights', style={'color': 'DarkCyan', 'fontSize': 15}
+                         )
+            ],
+            className="recommend"
+        ),
 
-
-         html.Div(
+        html.Div(
             [
                 html.Div(
                     [
@@ -124,59 +127,17 @@ app.layout = html.Div(
                             className="twelve columns card-left",
                             children=[
                                 html.Div(
-                                    className="padding-top-bot",
-                                    children=[
-                                        html.H6("PRICE VS QUANTITY"),
-                                        dcc.Graph(id="lineChart2",),
-                                    ],
-                                )
-                            ],
-                        ),
-
-
-                    ],
-                    className="pretty_container four columns",
-
-                ),
-                html.Div(
-                    [
-                        html.Div(
-                            className="twelve columns card-left",
-                            children=[
-                                html.Div(
-                                    className="padding-top-bot",
-                                    children=[
-                                        html.H6("MAXIMIZING REVENUE"),
-                                        dcc.Graph(id="lineChart1"),
-                                    ],
-                                )
-                            ],
-                        ),
-
-
-                    ],
-                    className="pretty_container four columns",
-
-                ),
-
-
-                html.Div(
-                    [
-                        html.Div(
-                            className="twelve columns card-left",
-                            children=[
-                                html.Div(
-                                    className="padding-top-bot",
+                                    # className="padding-top-bot",
                                     children=[
                                         # html.Div(id="table1"),
-                                        html.H6("SIMULATED RESULT"),
+                                        html.H6("PRICE OPTIMIZATION RESULT"),
                                         dash_table.DataTable(
 
                                             id='heatmap',
                                             columns=[
                                                 {'name': 'Price', 'id': 'Price',
                                                     'type': 'numeric'},
-                                                {'name': 'Revenue', 'id': 'Revenue',
+                                                {'name': 'Profit', 'id': 'Revenue',
                                                     'type': 'numeric'},
                                                 {'name': 'Quantity', 'id': 'Quantity',
                                                     'type': 'numeric'},
@@ -235,10 +196,57 @@ app.layout = html.Div(
                     className="pretty_container two columns",
 
                 ),
+
+                html.Div(
+                    [
+                        html.Div(
+                            className="twelve columns card-left",
+                            children=[
+                                html.Div(
+                                    # className="padding-top-bot",
+                                    children=[
+                                        html.H6("MAXIMIZING PROFIT"),
+                                        dcc.Graph(id="lineChart1"),
+                                    ],
+                                )
+                            ],
+                        ),
+
+
+                    ],
+                    className="pretty_container four columns",
+
+                ),
+                html.Div(
+                    [
+                        html.Div(
+                            className="twelve columns card-left",
+                            children=[
+                                html.Div(
+                                    # className="padding-top-bot",
+                                    children=[
+                                        html.H6("PRICE VS QUANTITY"),
+                                        dcc.Graph(id="lineChart2",),
+                                    ],
+                                )
+                            ],
+                        ),
+
+
+                    ],
+                    className="pretty_container four columns",
+
+                ),
+
+
+
+
             ],
+            className='graphContainer'
         ),
-        
+
     ]
+
 )
 
 
@@ -274,7 +282,7 @@ def update_output_All(var_opt, var_range, var_cost):
 
             if opt_Revenue > 0:
                 return [res.to_dict('records'), fig_PriceVsRevenue, fig_PriceVsQuantity,
-                        f'The maximum revenue of {opt_Revenue} is achieved by optimizing {var_opt} of {opt_Price}, fixed cost of {var_cost} and optimization was carried for {var_opt} range between {var_range}']
+                        f'The maximum profit of {opt_Revenue} is achieved by optimizing {var_opt} of {opt_Price}, fixed cost of {var_cost} and optimization was carried for {var_opt} range between {var_range}']
             else:
                 return [res.to_dict('records'), fig_PriceVsRevenue, fig_PriceVsQuantity,
                         f'For the fixed cost of {var_cost} and {var_opt} range between {var_range}, you will incur loss in revenue']
@@ -288,7 +296,7 @@ def update_output_All(var_opt, var_range, var_cost):
 
             if opt_Revenue > 0:
                 return [res.to_dict('records'), fig_QuantityVsRevenue, fig_PriceVsQuantity,
-                        f'The maximum revenue of {opt_Revenue} is achieved by optimizing {var_opt} of {opt_Quantity}, fixed cost of {var_cost} and optimization was carried for {var_opt} range between {var_range}']
+                        f'The maximum profit of {opt_Revenue} is achieved by optimizing {var_opt} of {opt_Quantity}, fixed cost of {var_cost} and optimization was carried for {var_opt} range between {var_range}']
             else:
                 return [res.to_dict('records'), fig_QuantityVsRevenue, fig_PriceVsQuantity,
                         f'For the fixed cost of {var_cost} and {var_opt} range between {var_range}, you will incur loss in revenue']

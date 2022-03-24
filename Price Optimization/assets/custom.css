@@ -10,13 +10,9 @@ body {
 }
 
 .study-browser-banner {
-  /* background: rgb(2,21,70); */
+  background: rgb(2,21,70);
   background: rgb(2, 0, 36);
-  background: linear-gradient(
-    109.6deg,
-    rgba(156, 252, 248, 1) 11.2%,
-    rgba(110, 123, 251, 1) 91.1%
-  );
+  background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   /* linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 17%, rgba(0,212,255,1) 100%); */
   color: white;
   /* padding: 12px;
@@ -193,8 +189,9 @@ h5 {
 }
 .baseDiv {
   display: flex;
-  justify-content: start;
+  justify-content: space-evenly;
   flex-direction: row;
+  margin-top: 10px;
 }
 
 .baseDiv h6{
@@ -203,16 +200,16 @@ h5 {
 .radioBtns {
   letter-spacing: 0.1rem;
   margin-top: 1rem;
-  margin-left: 10px;
+  /* margin-left: 10px; */
 }
 
 .rangeSlider {
   letter-spacing: 1;
   margin-top: 0.75rem;
-  margin-left: 20px;
+  /* margin-left: 20px; */
   position: absolute;
-  right: 410px;
-  top:80px;
+  right: 38%;
+  top:10%;
 }
 
 #my-range-slider{
@@ -222,3 +219,26 @@ h5 {
 }
 
 
+.recommend{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  /* margin: 10px; */
+}
+
+.recommend h6{
+  margin-top: 0;
+}
+
+.recommend div{
+}
+
+.graphContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+#selected-cost-opt{
+  /* margin-left: 20px; */
+}
