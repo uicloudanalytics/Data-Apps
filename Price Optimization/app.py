@@ -143,7 +143,7 @@ app.layout = html.Div(
                             className="card halfwidth",
                             children=[
                                 # html.Div(id="table1"),
-                                html.H6("PRICE OPTIMIZATION RESULT"),
+                                html.H6("Price Optimization Result"),
                                 dash_table.DataTable(
 
                                     id='heatmap',
@@ -205,7 +205,7 @@ app.layout = html.Div(
                         html.Div(
                             className="card",
                             children=[
-                                html.H6("MAXIMIZING PROFIT"),
+                                html.H6("Maximizing Profit"),
                                 dcc.Graph(id="lineChart1", figure={
                                     'layout': go.Layout(margin={'t': 0, 'b': 0, 'l': 0, 'r': 0, 'pad': 0})}),
                             ],
@@ -213,7 +213,7 @@ app.layout = html.Div(
                         html.Div(
                             className="card",
                             children=[
-                                html.H6("PRICE VS QUANTITY"),
+                                html.H6("Price vs Quantity"),
                                 dcc.Graph(id="lineChart2", figure={'layout': go.Layout(
                                     margin={'t': 2, 'b': 2, 'r': 2, 'l': 2})}),
                             ],
@@ -279,7 +279,7 @@ def update_output_All(var_opt, var_range, var_cost):
             else:
                 return [res.to_dict('records'), fig_QuantityVsRevenue, fig_PriceVsQuantity,
                         f'For the fixed cost of {var_cost} and {var_opt} range between {var_range}, you will incur loss in revenue']
-        
+
     except Exception as e:
         logging.exception('Something went wrong with interaction logic:', e)
 
