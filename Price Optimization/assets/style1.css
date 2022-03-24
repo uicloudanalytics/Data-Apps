@@ -1,22 +1,3 @@
-/* Table of contents ––––––––––––––––––––––––––––––––––––––––––––––––––
-Taken from https://codepen.io/chriddyp/pen/bWLwgP.css
-- Grid
-- Base Styles
- - Typography
- - Links
- - Buttons
- - Forms
- - Lists
- - Code
- - Tables
- - Spacing
- - Utilities
- - Clearing
- - Media Queries
- - Custom App CSS */
-
-
-/* Grid –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .container {
     position: relative;
     width: 100%;
@@ -441,6 +422,7 @@ Taken from https://codepen.io/chriddyp/pen/bWLwgP.css
     letter-spacing: 2.1px;
     font-size: 16px;
     padding-left: 10px;
+    padding-right: 10px;
   }
   p {
     font-family: "Open Sans Light";
@@ -489,6 +471,7 @@ Taken from https://codepen.io/chriddyp/pen/bWLwgP.css
   .logo {
     height: 30px;
     padding-bottom: 12px;
+    vertical-align: middle;
   }
   .Select-control, .Select-menu-outer, .Select-multi-value-wrapper, .select-up, .is-open .Select-control {
     background-color: #fcfcfc;
@@ -609,7 +592,7 @@ Taken from https://codepen.io/chriddyp/pen/bWLwgP.css
    .side-by-side-right{
       display: inline-block;
       width: 48%;
-      float:right;
+      /* float:right; */
     }
     .div-for-charts{
       margin: 0px;

@@ -21,11 +21,12 @@ group_colors = {"control": "light blue", "reference": "red"}
 
 app = dash.Dash(
     __name__, meta_tags=[
-        {"name": "viewport", "content": "width=device-width"}],
+        {"name": "viewport", "content": "width=device-width"}], title="Price Optimization", update_title="Updating... Pls wait !"
     # link=[
     #     {"rel":"icon","href":"https://149510500.v2.pressablecdn.com/wp-content/uploads/2021/07/cropped-FAV-ICON-cropped-UBTI_Globe-32x32.png","sizes":"32x32"}
     # ]
 )
+# app._favicon = ("asses")
 
 server = app.server
 
@@ -42,15 +43,15 @@ app.layout = html.Div(
         html.Div(
             className="study-browser-banner row",
             children=[
+                html.Img(
+                    className="logo", src=app.get_asset_url("tag2.svg")
+                ),
                 html.H2(className="h2-title",
-                        children="Price Optimization using Machine Learning"),
+                        children="Price Optimization using Machine Learning  "),
+                html.Img(
+                    className="logo", src=app.get_asset_url("tag2.svg")
+                ),
 
-                # html.Div(
-                #     className="div-logo",
-                #     children=html.Img(
-                #         className="logo", src=app.get_asset_url("ublogo.png")
-                #     ),
-                # ),
 
             ],
             style={
@@ -139,140 +140,103 @@ app.layout = html.Div(
                 html.Div(
                     [
                         html.Div(
-                            className="twelve columns card-left",
+                            className="card halfwidth",
                             children=[
-                                html.Div(
-                                    # className="padding-top-bot",
-                                    children=[
-                                        # html.Div(id="table1"),
-                                        html.H6("PRICE OPTIMIZATION RESULT"),
-                                        dash_table.DataTable(
+                                # html.Div(id="table1"),
+                                html.H6("PRICE OPTIMIZATION RESULT"),
+                                dash_table.DataTable(
 
-                                            id='heatmap',
-                                            columns=[
-                                                {'name': 'Price', 'id': 'Price',
-                                                    'type': 'numeric'},
-                                                {'name': 'Profit', 'id': 'Revenue',
-                                                    'type': 'numeric'},
-                                                {'name': 'Quantity', 'id': 'Quantity',
-                                                    'type': 'numeric'},
-                                            ],
-                                            style_data_conditional=[
-                                                {
-                                                    'if': {'row_index': 'odd'},
-                                                    'backgroundColor': 'rgb(248, 248, 248)'
-                                                },
-                                                {
-                                                    'if': {
-                                                        'row_index': 0,  # number | 'odd' | 'even'
-                                                        'column_id': 'Revenue'
-                                                    },
-                                                    'backgroundColor': 'dodgerblue',
-                                                    'color': 'white'
-                                                },
-                                                {
-                                                    'if': {
-                                                        'row_index': 0,  # number | 'odd' | 'even'
-                                                        'column_id': 'Price'
-                                                    },
-                                                    'backgroundColor': 'dodgerblue',
-                                                    'color': 'white'
-                                                },
-                                                {
-                                                    'if': {
-                                                        'row_index': 0,  # number | 'odd' | 'even'
-                                                        'column_id': 'Quantity'
-                                                    },
-                                                    'backgroundColor': 'dodgerblue',
-                                                    'color': 'white'
-                                                },
-                                            ],
-                                            style_header={
-                                                'backgroundColor': 'rgb(230, 230, 230)',
-                                                'fontWeight': 'bold',
-                                                # 'border': '1px solid black'
+                                    id='heatmap',
+                                    columns=[
+                                        {'name': 'Price', 'id': 'Price',
+                                         'type': 'numeric'},
+                                        {'name': 'Profit', 'id': 'Revenue',
+                                         'type': 'numeric'},
+                                        {'name': 'Quantity', 'id': 'Quantity',
+                                         'type': 'numeric'},
+                                    ],
+                                    style_data_conditional=[
+                                        {
+                                            'if': {'row_index': 'odd'},
+                                            'backgroundColor': 'rgb(248, 248, 248)'
+                                        },
+                                        {
+                                            'if': {
+                                                'row_index': 0,  # number | 'odd' | 'even'
+                                                'column_id': 'Revenue'
                                             },
-                                            style_data={
-                                                'whiteSpace': 'normal',
-                                                'height': 'auto',
+                                            'backgroundColor': 'dodgerblue',
+                                            'color': 'white'
+                                        },
+                                        {
+                                            'if': {
+                                                'row_index': 0,  # number | 'odd' | 'even'
+                                                'column_id': 'Price'
                                             },
-                                            editable=True,
-                                            filter_action="native",
-                                            sort_action="native",
-                                            page_size=10,
-
-                                        ),
+                                            'backgroundColor': 'dodgerblue',
+                                            'color': 'white'
+                                        },
+                                        {
+                                            'if': {
+                                                'row_index': 0,  # number | 'odd' | 'even'
+                                                'column_id': 'Quantity'
+                                            },
+                                            'backgroundColor': 'dodgerblue',
+                                            'color': 'white'
+                                        },
                                     ],
+                                    style_header={
+                                        'backgroundColor': 'rgb(230, 230, 230)',
+                                        'fontWeight': 'bold',
+                                        # 'border': '1px solid black'
+                                    },
+                                    style_data={
+                                        'whiteSpace': 'normal',
+                                        'height': 'auto',
+                                    },
+                                    editable=True,
+                                    filter_action="native",
+                                    sort_action="native",
+                                    page_size=10,
+
                                 )
                             ],
                         ),
-
-                    ],
-                    className="pretty_container two columns",
-
-                ),
-
-                html.Div(
-                    [
                         html.Div(
-                            className="twelve columns card-left",
+                            className="card",
                             children=[
-                                html.Div(
-                                    # className="padding-top-bot",
-                                    children=[
-                                        html.H6("MAXIMIZING PROFIT"),
-                                        dcc.Graph(id="lineChart1", figure={
-                                                  'layout': go.Layout(margin={'t': 0, 'b': 0, 'l': 0, 'r': 0})}),
-                                    ],
-                                )
+                                html.H6("MAXIMIZING PROFIT"),
+                                dcc.Graph(id="lineChart1", figure={
+                                    'layout': go.Layout(margin={'t': 0, 'b': 0, 'l': 0, 'r': 0, 'pad': 0})}),
                             ],
                         ),
-
-                    ],
-                    className="pretty_container four columns",
-
-                ),
-                html.Div(
-                    [
                         html.Div(
-                            className="twelve columns card-left",
+                            className="card",
                             children=[
-                                html.Div(
-                                    # className="padding-top-bot",
-                                    children=[
-                                        html.H6("PRICE VS QUANTITY"),
-                                        dcc.Graph(id="lineChart2",),
-                                    ],
-                                )
+                                html.H6("PRICE VS QUANTITY"),
+                                dcc.Graph(id="lineChart2", figure={'layout': go.Layout(
+                                    margin={'t': 2, 'b': 2, 'r': 2, 'l': 2})}),
                             ],
                         ),
-
-
                     ],
-                    className="pretty_container four columns",
-
+                    className='graphContainer'
                 ),
 
+            ]
 
-
-
-            ],
-            className='graphContainer'
-        ),
-
+        )
     ]
-
 )
 
 
-@app.callback(
+@ app.callback(
     dash.dependencies.Output('output-container-range-slider', 'children'),
     [dash.dependencies.Input('my-range-slider', 'value')])
 def update_output(value):
     return "{}".format(value)
 
 
-@app.callback(
+@ app.callback(
     [
         Output("heatmap", 'data'),
         Output("lineChart1", 'figure'),
@@ -321,4 +285,6 @@ def update_output_All(var_opt, var_range, var_cost):
 
 
 if __name__ == "__main__":
-    app.run_server(debug=True, use_reloader=True, dev_tools_ui=True)
+
+    app.run_server(debug=True, use_reloader=True,
+                   dev_tools_ui=True, host="0.0.0.0", port="5000")
