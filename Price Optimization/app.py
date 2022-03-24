@@ -279,7 +279,7 @@ def update_output_All(var_opt, var_range, var_cost):
             else:
                 return [res.to_dict('records'), fig_QuantityVsRevenue, fig_PriceVsQuantity,
                         f'For the fixed cost of {var_cost} and {var_opt} range between {var_range}, you will incur loss in revenue']
-
+        
     except Exception as e:
         logging.exception('Something went wrong with interaction logic:', e)
 
