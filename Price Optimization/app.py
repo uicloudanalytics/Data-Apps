@@ -62,50 +62,65 @@ app.layout = html.Div(
 
             # className="padding-top-bot",
             children=[
+                html.Div(
+                    [
+                        html.H6("Optimize"),
+                        dcc.RadioItems(
+                            id="selected-var-opt",
+                            className="radioBtns",
 
-                html.H6("Optimize"),
-                dcc.RadioItems(
-                    id="selected-var-opt",
-                    className="radioBtns",
+                            inline=True,
+                            options=[
+                                {
+                                    "label": "Price",
+                                    "value": "price"
+                                },
+                                {
+                                    "label": "Quantity",
+                                    "value": "quantity"
+                                },
 
-                    inline=True,
-                    options=[
-                        {
-                            "label": "Price",
-                            "value": "price"
-                        },
-                        {
-                            "label": "Quantity",
-                            "value": "quantity"
-                        },
+                            ],
+                            value="price",
+                            # labelStyle={
+                            #     "display": "inline-block",
+                            #     "padding": "12px 12px 12px 12px",
+                            # },
+                        ),
 
                     ],
-                    value="price",
-                    # labelStyle={
-                    #     "display": "inline-block",
-                    #     "padding": "12px 12px 12px 12px",
-                    # },
+                    className='filter'
                 ),
+                html.Div(
+                    [
+                        html.H6("Optimization Range"),
+                        html.Div(id='output-container-range-slider',
+                                 className="rangeSlider"),
+                        dcc.RangeSlider(
+                            id='my-range-slider', min=0, max=500, step=1,
+                            marks={
+                                0: '0',
+                                500: '500'
+                            },
+                            value=[200, 400]
+                        )
+                    ],
+                    className='filter'
 
-                html.H6("Optimization Range"),
-                html.Div(id='output-container-range-slider',
-                         className="rangeSlider"),
-                dcc.RangeSlider(
-                    id='my-range-slider', min=0, max=500, step=1,
-                    marks={
-                        0: '0',
-                        500: '500'
-                    },
-                    value=[200, 400]
                 ),
+                html.Div(
+                    [
+                        html.H6("Fixed Cost"),
+                        daq.NumericInput(
+                            id="selected-cost-opt",
+                            min=0,
+                            max=10000,
+                            value=80
+                        ),
+                    ],
+                    className='filter'
+                )
 
-                html.H6("Fixed Cost"),
-                daq.NumericInput(
-                    id="selected-cost-opt",
-                    min=0,
-                    max=10000,
-                    value=80
-                ),
             ],
             className="baseDiv row",
             id="cross-filter-options",
@@ -206,12 +221,12 @@ app.layout = html.Div(
                                     # className="padding-top-bot",
                                     children=[
                                         html.H6("MAXIMIZING PROFIT"),
-                                        dcc.Graph(id="lineChart1"),
+                                        dcc.Graph(id="lineChart1", figure={
+                                                  'layout': go.Layout(margin={'t': 0, 'b': 0, 'l': 0, 'r': 0})}),
                                     ],
                                 )
                             ],
                         ),
-
 
                     ],
                     className="pretty_container four columns",
@@ -306,4 +321,4 @@ def update_output_All(var_opt, var_range, var_cost):
 
 
 if __name__ == "__main__":
-    app.run_server(debug=True, use_reloader=True, dev_tools_ui=False)
+    app.run_server(debug=True, use_reloader=True, dev_tools_ui=True)

@@ -189,9 +189,9 @@ h5 {
 }
 .baseDiv {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   flex-direction: row;
-  margin-top: 10px;
+  margin-top: 2%;
 }
 
 .baseDiv h6{
@@ -201,6 +201,12 @@ h5 {
   letter-spacing: 0.1rem;
   margin-top: 1rem;
   /* margin-left: 10px; */
+}
+
+.filter{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
 .rangeSlider {
@@ -223,7 +229,8 @@ h5 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  /* margin: 10px; */
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .recommend h6{
@@ -236,9 +243,11 @@ h5 {
 .graphContainer{
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-around;
+  justify-items: center;
 }
 
-#selected-cost-opt{
-  /* margin-left: 20px; */
+
+#selected-cost-opt,#selected-var-opt{
+  margin-left: 10px;
 }
