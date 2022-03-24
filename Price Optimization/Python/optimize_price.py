@@ -26,7 +26,7 @@ def fun_optimize(var_opt, var_range, var_cost, df):
                 Optimized value of revenue]
     """
 
-    fig_PriceVsQuantity = px.scatter(df, x="Price", y="Quantity", color="Year", trendline="ols")
+    fig_PriceVsQuantity = px.scatter(df, x="Price", y="Quantity", color="Year", trendline="ols",color_continuous_scale=px.colors.sequential.Viridis)
 
     # fit OLS model
     model = ols("Quantity ~ Price", data=df).fit()
@@ -47,7 +47,7 @@ def fun_optimize(var_opt, var_range, var_cost, df):
         
     fig_PriceVsRevenue = go.Figure()
     fig_PriceVsRevenue.add_trace(go.Scatter(
-        x=profit['Price'], y=profit['Revenue']))
+        x=profit['Price'], y=profit['Revenue'],mode='lines+markers', line_color='#0000ff'))
     fig_PriceVsRevenue.add_annotation(x=int(max_val['Price']), y=int(max_val['Revenue']),
                                       text="Maximum Profit",
                                       showarrow=True,
@@ -61,7 +61,7 @@ def fun_optimize(var_opt, var_range, var_cost, df):
 
             xaxis_title="Price",
 
-            yaxis_title="Revenue")
+            yaxis_title="Profit")
     fig_PriceVsQuantity.update_layout(
 
             margin={'t': 0,'b':0,'r':0,'l':0},

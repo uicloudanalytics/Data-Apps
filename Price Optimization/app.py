@@ -26,6 +26,7 @@ app = dash.Dash(
     #     {"rel":"icon","href":"https://149510500.v2.pressablecdn.com/wp-content/uploads/2021/07/cropped-FAV-ICON-cropped-UBTI_Globe-32x32.png","sizes":"32x32"}
     # ]
 )
+# app._favicon = ("asses")
 
 server = app.server
 
