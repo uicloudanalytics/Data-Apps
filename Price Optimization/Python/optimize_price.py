@@ -47,27 +47,21 @@ def fun_optimize(var_opt, var_range, var_cost, df):
         
     fig_PriceVsRevenue = go.Figure()
     fig_PriceVsRevenue.add_trace(go.Scatter(
-    x=profit['Price'], y=profit['Revenue'],mode='lines+markers', line_color='#1572A1'))
+        x=profit['Price'], y=profit['Revenue'],mode='lines+markers', line_color='#1572A1'))
     fig_PriceVsRevenue.add_annotation(x=int(max_val['Price']), y=int(max_val['Revenue']),
                                       text="Maximum Profit",
                                       showarrow=True,
                                       arrowhead=1)
 
     fig_PriceVsRevenue.update_layout(
-
-            margin={'t': 2,'b':2,'r':2,'l':2},
-
-            showlegend=False,
-
-            xaxis_title="Price",
-
-            yaxis_title="Profit")
-    fig_PriceVsQuantity.update_layout(
-
             margin={'t': 0,'b':0,'r':0,'l':0},
-
             showlegend=False,
-
+            xaxis_title="Price",
+            yaxis_title="Profit")
+            
+    fig_PriceVsQuantity.update_layout(
+            margin={'t': 0,'b':0,'r':0,'l':0},
+            showlegend=False,
     )
 
     fig_PriceVsRevenue.add_vline(x=int(max_val['Price']), line_width=2, line_dash="dash",

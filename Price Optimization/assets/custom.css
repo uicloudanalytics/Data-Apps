@@ -18,6 +18,13 @@ body {
   padding-left: 2px; */
 }
 
+#dash123-app-content {
+  /* background-color: #e7f4fc; */
+  /* background-image: linear-gradient(to bottom, #accbee 0%, #e7f0fd 100%); */
+  background-image: linear-gradient(to top, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 17%, rgba(0,212,255,1) 100%);
+  background-size:cover
+}
+
 /* .div-logo{
   display: inline-block;
   float: right;
@@ -50,8 +57,6 @@ h6 {
   font-family: "Roboto";
   font-weight: 600;
   font-size: 16px;
-  color: #151D3B !important;
-  font-weight: 600 !important;
 }
 
 h5 {
@@ -273,6 +278,8 @@ h5 {
 }
 .card h6{
   text-align: center;
+  color: #151D3B !important;
+  font-weight: 600 !important;
 }
 .card:hover{
   box-shadow: 2px 2px 2px 2px dodgerblue;

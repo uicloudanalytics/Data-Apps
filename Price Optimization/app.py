@@ -31,11 +31,12 @@ app = dash.Dash(
 server = app.server
 
 # Load the data
-df = pd.read_csv('Data/price.csv')
-df.head(10)
 
+# # df.head(10)
+# print(df.head(10))
 # App Layout
 app.layout = html.Div(
+   
     children=[
         # Error Message
         html.Div(id="error-message"),
@@ -50,18 +51,15 @@ app.layout = html.Div(
                         children="Price Optimization using Machine Learning  "),
                 html.Img(
                     className="logo", src=app.get_asset_url("tag2.svg")
-                ),
-
-
-            ],
-            style={
-                'textAlign': 'center'
-            }
+                )
+            ],style={'textAlign': 'center'}
         ),
 
         html.Div(
+            id="dash123-app-content",
+            children=[
 
-            # className="padding-top-bot",
+        html.Div(
             children=[
                 html.Div(
                     [
@@ -69,7 +67,6 @@ app.layout = html.Div(
                         dcc.RadioItems(
                             id="selected-var-opt",
                             className="radioBtns",
-
                             inline=True,
                             options=[
                                 {
@@ -82,33 +79,23 @@ app.layout = html.Div(
                                 },
 
                             ],
-                            value="price",
-                            # labelStyle={
-                            #     "display": "inline-block",
-                            #     "padding": "12px 12px 12px 12px",
-                            # },
+                            value="price"
                         ),
 
                     ],
                     className='filter'
                 ),
-                html.Div(
-                    [
-                        html.H6("Optimization Range"),
-                        html.Div(id='output-container-range-slider',
-                                 className="rangeSlider"),
-                        dcc.RangeSlider(
-                            id='my-range-slider', min=0, max=500, step=1,
-                            marks={
-                                0: '0',
-                                500: '500'
-                            },
-                            value=[200, 400]
-                        )
-                    ],
-                    className='filter'
-
+                html.Div(id="my-output",
+                # children=[
+                #     html.Div([
+                #             html.H6("Optimization Range"),                        
+                #             html.Div(id='output-container-range-slider',className="rangeSlider"),
+                #             dcc.RangeSlider(id='my-range-slider', min=0, max=5000, step=1,
+                #                             marks={ 0: '0', 5000: '5000'}, value=[1600, 3000]),
+                #         ], className='filter')
+                # ]
                 ),
+
                 html.Div(
                     [
                         html.H6("Fixed Cost"),
@@ -116,7 +103,7 @@ app.layout = html.Div(
                             id="selected-cost-opt",
                             min=0,
                             max=10000,
-                            value=80
+                            value=150
                         ),
                     ],
                     className='filter'
@@ -129,8 +116,7 @@ app.layout = html.Div(
         html.Div(
             children=[
                 html.H6("Recommendation : "),
-                html.Div(id='id-insights', style={'color': 'DarkCyan', 'fontSize': 15}
-                         )
+                html.Div(id='id-insights', style={'color': 'DarkCyan', 'fontSize': 15})
             ],
             className="recommend"
         ),
@@ -206,16 +192,14 @@ app.layout = html.Div(
                             className="card",
                             children=[
                                 html.H6("Maximizing Profit"),
-                                dcc.Graph(id="lineChart1", figure={
-                                    'layout': go.Layout(margin={'t': 0, 'b': 0, 'l': 0, 'r': 0, 'pad': 0})}),
+                                dcc.Graph(id="lineChart1"),
                             ],
                         ),
                         html.Div(
                             className="card",
                             children=[
                                 html.H6("Price vs Quantity"),
-                                dcc.Graph(id="lineChart2", figure={'layout': go.Layout(
-                                    margin={'t': 2, 'b': 2, 'r': 2, 'l': 2})}),
+                                dcc.Graph(id="lineChart2"),
                             ],
                         ),
                     ],
@@ -224,14 +208,35 @@ app.layout = html.Div(
 
             ]
 
-        )
+        )])
     ]
 )
 
+@app.callback(
+    Output('my-output','children'),
+    [Input('selected-var-opt','value')]
+)
+def update_div_range(input_val):
+    if input_val=="price":
+        return html.Div([
+            html.H6("Optimization Range"),                        
+            html.Div(id='output-container-range-slider',className="rangeSlider"),
+            dcc.RangeSlider(id='my-range-slider', min=0, max=5000, step=1,
+                            marks={ 0: '0', 5000: '5000'}, value=[1600, 3000]),
+        ], className='filter')
+    else:
+        return html.Div([
+            html.H6("Optimization Range"),                        
+            html.Div(id='output-container-range-slider',className="rangeSlider"),
+            dcc.RangeSlider(id='my-range-slider', min=0, max=500, step=1,
+                            marks={ 0: '0', 500: '500'}, value=[160, 300]),
+        ], className='filter')
+
+
 
 @ app.callback(
-    dash.dependencies.Output('output-container-range-slider', 'children'),
-    [dash.dependencies.Input('my-range-slider', 'value')])
+    Output('output-container-range-slider', 'children'),
+    [Input('my-range-slider', 'value')])
 def update_output(value):
     return "{}".format(value)
 
@@ -252,6 +257,9 @@ def update_output(value):
 def update_output_All(var_opt, var_range, var_cost):
 
     try:
+
+        df = pd.read_csv('Data/price.csv')
+
         if var_opt == 'price':
 
             res, fig_PriceVsRevenue, fig_PriceVsQuantity, opt_Price, opt_Revenue = Python.optimize_price.fun_optimize(
@@ -264,21 +272,20 @@ def update_output_All(var_opt, var_range, var_cost):
                         f'The maximum profit of {opt_Revenue} is achieved by optimizing {var_opt} of {opt_Price}, fixed cost of {var_cost} and optimization was carried for {var_opt} range between {var_range}']
             else:
                 return [res.to_dict('records'), fig_PriceVsRevenue, fig_PriceVsQuantity,
-                        f'For the fixed cost of {var_cost} and {var_opt} range between {var_range}, you will incur loss in revenue']
+                        f'For the fixed cost of {var_cost} and {var_opt} range between {var_range}, you will incur loss in profit']
 
         else:
 
             res, fig_QuantityVsRevenue, fig_PriceVsQuantity, opt_Quantity, opt_Revenue = Python.optimize_quantity.fun_optimize(
                 var_opt, var_range, var_cost, df)
-            res = np.round(res.sort_values(
-                'Revenue', ascending=False), decimals=2)
+            res = np.round(res.sort_values('Revenue', ascending=False), decimals=2)
 
             if opt_Revenue > 0:
                 return [res.to_dict('records'), fig_QuantityVsRevenue, fig_PriceVsQuantity,
                         f'The maximum profit of {opt_Revenue} is achieved by optimizing {var_opt} of {opt_Quantity}, fixed cost of {var_cost} and optimization was carried for {var_opt} range between {var_range}']
             else:
                 return [res.to_dict('records'), fig_QuantityVsRevenue, fig_PriceVsQuantity,
-                        f'For the fixed cost of {var_cost} and {var_opt} range between {var_range}, you will incur loss in revenue']
+                        f'For the fixed cost of {var_cost} and {var_opt} range between {var_range}, you will incur loss in profit']
 
     except Exception as e:
         logging.exception('Something went wrong with interaction logic:', e)
@@ -286,5 +293,5 @@ def update_output_All(var_opt, var_range, var_cost):
 
 if __name__ == "__main__":
 
-    app.run_server(debug=True, use_reloader=True,
-                   dev_tools_ui=True, host="0.0.0.0", port="5000")
+    app.run_server(debug=False, use_reloader=False,dev_tools_ui=False
+                   , host="0.0.0.0", port="5000")
