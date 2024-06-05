@@ -1,0 +1,3 @@
+Dash
+google-generativeai
+Pillow
